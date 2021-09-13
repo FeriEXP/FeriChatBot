@@ -223,8 +223,9 @@ async def alive(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
-    Crot = f"{MEMEK}"
-    await client.send_video(message.chat.id, Crot, caption=f"""**༄ Holla I'm [{KONTOL}](https://t.me/{BOT_USERNAME})**
+    CROOT = f"{MEMEK}"
+    await client.send_video(message.chat.id, CROOT,
+caption=f"""**༄ Holla I'm [{KONTOL}](https://t.me/{BOT_USERNAME})**
 ༄ **I'm Working Properly**
 ༄ **Bot : 8.0 LATEST**
 ༄ **My Master : [Feri](https://t.me/xflicks)**
