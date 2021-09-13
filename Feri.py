@@ -1,9 +1,13 @@
-print("[INFO]: INITIALIZING ...")
 import re
+import requests
+import traceback
+from asyncio import get_running_loop
+from io import BytesIO
+from asyncio import get_running_loop
+from io import BytesIO
 from time import time
 from datetime import datetime
 from asyncio import gather, get_event_loop, sleep
-import requests
 from aiohttp import ClientSession
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import Client, filters, idle
@@ -42,6 +46,16 @@ TIME_DURATION_UNITS = (
     ("min", 60),
     ("sec", 1)
 )
+
+
+def convert(text):
+    audio = BytesIO()
+    i = Translator().translate(text, dest="en")
+    lang = i.src
+    tts = gTTS(text, lang=lang)
+    audio.name = lang + ".mp3"
+    tts.write_to_fp(audio)
+    return audio
 
 
 async def _human_time_duration(seconds):
@@ -201,6 +215,26 @@ async def chika(client, message):
         return await client.send_video(message.chat.id, video=results)
     except Exception:
         await message.reply_text("`404 chika videos not found`")
+
+
+@feri.on_message(filters.command(["tts", f"tts@{BOT_USERNAME}"]))
+async def text_to_speech(_, message: Message):
+    if not message.reply_to_message:
+        return await message.reply_text("`reply to some text...`")
+    if not message.reply_to_message.text:
+        return await message.reply_text("`reply to some text...`")
+    m = await message.reply_text("`processing...`")
+    text = message.reply_to_message.text
+    try:
+        loop = get_running_loop()
+        audio = await loop.run_in_executor(None, convert, text)
+        await message.reply_audio(audio)
+        await m.delete()
+        audio.close()
+    except Exception as e:
+        await m.edit(str(e))
+        es = traceback.format_exc()
+        print(es)
 
 
 async def main():
