@@ -109,29 +109,10 @@ async def type_and_send(message):
 
 
 @feri.on_message(filters.command(["start", f"start@{BOT_USERNAME}"]) & ~filters.edited)
-async def start(client: Client, message: Message):
-    start = time()
-    delta_ping = time() - start
-    current_time = datetime.utcnow()
-    uptime_sec = (current_time - START_TIME).total_seconds()
-    uptime = await _human_time_duration(int(uptime_sec))
-    PM_IMG = f"{MEMEK}"
-    kontol = await client.send_video(message.chat.id, PM_IMG, 
-        caption=f"**Time Taken:** `{delta_ping * 1000:.3f} ms`\n"
-        f"**Uptime:** `{uptime}`",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "ꜱᴏᴜʀᴄᴇ", url="https://github.com/FeriEXP/FeriChatBot"
-                    ),
-                    InlineKeyboardButton(
-                        "ꜱᴜᴘᴘᴏʀᴛ", url="https://t.me/anossupport"
-                    )
-                ]
-            ]
-        )
-    )
+async def start(_, message):
+    await feri.send_chat_action(message.chat.id, "typing")
+    await sleep(2)
+    await message.reply_text("**Assalamualaikum**")
 
 
 @feri.on_message(
@@ -242,7 +223,7 @@ async def alive(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
-    await message.reply_video(
+    await message.send_video(
         photo=f"{MEMEK}",
         caption=f"""**༄ Holla I'm [{KONTOL}](https://t.me/{BOT_USERNAME})**
 ༄ **I'm Working Properly**
