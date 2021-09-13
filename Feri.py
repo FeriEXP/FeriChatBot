@@ -3,8 +3,8 @@ import requests
 import traceback
 from asyncio import get_running_loop
 from io import BytesIO
-from asyncio import get_running_loop
-from io import BytesIO
+from googletrans import Translator
+from gtts import gTTS
 from time import time
 from datetime import datetime
 from asyncio import gather, get_event_loop, sleep
@@ -50,7 +50,7 @@ TIME_DURATION_UNITS = (
 
 def convert(text):
     audio = BytesIO()
-    i = Translator().translate(text, dest="en")
+    i = Translator().translate(text, dest="id")
     lang = i.src
     tts = gTTS(text, lang=lang)
     audio.name = lang + ".mp3"
