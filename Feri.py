@@ -219,13 +219,12 @@ async def chika(client, message):
 
 @feri.on_message(filters.command(["tts", f"tts@{BOT_USERNAME}"]))
 async def text_to_speech(_, message: Message):
-    memek = message.reply_to_message.text
+    memek = message.reply_to_message
     if not memek:
         await message.reply_text("`reply to some text...`")
         return
     try:
         m = await message.reply_text("`processing...`")
-        text = message.reply_to_message.text
         loop = get_running_loop()
         audio = await loop.run_in_executor(None, convert, text)
         await message.reply_audio(audio)
