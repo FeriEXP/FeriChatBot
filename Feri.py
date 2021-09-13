@@ -123,7 +123,7 @@ async def start(client: Client, message: Message):
 @feri.on_message(
     ~filters.private
     & filters.text
-    & ~filters.command(["help"])
+    & ~filters.command(["start", f"start@{BOT_USERNAME}"])
     & ~filters.edited,
     group=69,
 )
@@ -142,6 +142,14 @@ async def chat(_, message: Message):
         )
         if not match:
             return
+    await type_and_send(message)
+
+
+@feri.on_message(filters.private & ~filters.command(["start", f"start@{BOT_USERNAME}"]) & ~filters.edited)
+async def chatpm(_, message):
+    if not message.text:
+        await message.reply_text("Ufff... ignoring ....")
+        return
     await type_and_send(message)
 
 
