@@ -237,7 +237,7 @@ async def text_to_speech(_, message: Message):
         print(es)
 
 
-@Client.on_message(filters.command(["alive", f"alive@{BOT_USERNAME}"]))
+@feri.on_message(filters.command(["alive", f"alive@{BOT_USERNAME}"]))
 async def alive(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
