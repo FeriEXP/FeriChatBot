@@ -15,7 +15,7 @@ Public Instance Of This Bot Can Be Found On Telegram As [@feritapibot](https://t
 - `/asupan` - random vide asupan
 - `/chika` - random video chika
 - `/truth` - random truth
-- `/truth` - random dare
+- `/dare` - random dare
 
 
 ## DEPLOY TO HEROKU
@@ -34,5 +34,5 @@ Public Instance Of This Bot Can Be Found On Telegram As [@feritapibot](https://t
 5. Edit `config.ini` with your own values.
 6. Run with `python3 Feri.py`
 
-# Credit
+### Credit
 - Source code ~ [LunaChatBot](https://github.com/TheHamkerCat/LunaChatBot)
