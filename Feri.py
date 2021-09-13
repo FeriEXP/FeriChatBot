@@ -226,7 +226,7 @@ async def text_to_speech(_, message: Message):
     try:
         m = await message.reply_text("`processing...`")
         loop = get_running_loop()
-        audio = await loop.run_in_executor(None, convert, text)
+        audio = await loop.run_in_executor(None, convert, memek)
         await message.reply_audio(audio)
         await m.delete()
         audio.close()
