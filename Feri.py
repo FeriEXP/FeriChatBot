@@ -237,6 +237,34 @@ async def text_to_speech(_, message: Message):
         print(es)
 
 
+@Client.on_message(filters.command(["alive", f"alive@{BOT_USERNAME}"]))
+async def alive(client: Client, message: Message):
+    current_time = datetime.utcnow()
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
+    await message.reply_photo(
+        photo=f"{MEMEK}",
+        caption=f"""**༄ Holla I'm [{KONTOL}](https://t.me/{BOT_USERNAME})**
+༄ **I'm Working Properly**
+༄ **Bot : 8.0 LATEST**
+༄ **My Master : [Feri](https://t.me/xflicks)**
+༄ **Service Uptime : `{uptime}`**
+**Thanks For Using Me ♥️**""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "ꜱᴏᴜʀᴄᴇ", url="https://github.com/FeriEXP/FeriChatBot"
+                    ),
+                    InlineKeyboardButton(
+                        "ꜱᴜᴘᴘᴏʀᴛ", url="https://t.me/anossupport"
+                    )
+                ]
+            ]
+        )
+    )
+
+
 async def main():
     global arq
     session = ClientSession()
